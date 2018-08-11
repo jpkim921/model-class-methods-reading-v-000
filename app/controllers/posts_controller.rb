@@ -1,7 +1,28 @@
 class PostsController < ApplicationController
+  # helper_method :params
 
   def index
-    @posts = Post.all
+
+    # provide a list of authors to the view for the filter control
+    @authors = Author.all
+
+    # filter the @posts list based on user input
+    if !params[:author].blank?
+      # by_author method from post model
+      @posts = Post.by_author(params[:author])
+    elsif !params[:date].blank?
+      if params[:date] == "Today"
+
+        # from_today method from post model
+        @posts = Post.from_today
+      else
+        # old_news method from post model
+        @posts = Post.old_news
+      end
+    else
+      # if no filters are applied, show all posts
+      @posts = Post.all
+    end
   end
 
   def show
