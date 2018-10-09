@@ -3,9 +3,11 @@
 <div>
   <h3>Filter posts:</h3>
   <%= form_tag("/posts", method: "get") do %>
+
+    <!-- the line below is a select drop down created from a collection -->
     <%= select_tag "author", options_from_collection_for_select(@authors, "id", "name"), include_blank: true %>
 
-    <!-- the line below is a custom drop down select -->
+    <!-- the line below is a custom select drop down menu -->
     <%= select_tag "date", options_for_select(["Today", "Old News"]), include_blank: true %>
 
     <%= submit_tag "Filter" %>
